@@ -1,0 +1,27 @@
+{
+  "name": "prubasjs",
+  "version": "1.0.0",
+  "description": "curso de JS avanzado",
+  "main": "init.js",
+  "scripts": {
+    "test": "..."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielveg4/pruebasJS.git"
+  },
+  "keywords": [
+    "JS",
+    "javascript",
+    "curso"
+  ],
+  "author": "Daniel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danielveg4/pruebasJS/issues"
+  },
+  "homepage": "https://github.com/danielveg4/pruebasJS#readme",
+  "dependencies": {
+    "clipboard": "^2.0.11"
+  }
+}
