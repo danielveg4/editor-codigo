@@ -23,5 +23,19 @@ try {
     console.log('te está dando error: ', err.message);
     object2 = 18;
 } finally {
-    console.log('el object tiene que ser 18');
+    console.log('el object tiene que ser 18', object2);
 }
+
+console.log('hola mundo');
+
+const objectDinamica = {
+    name: 'Juan',
+    age: 25,
+    email: 'dadsa@gmail.com'
+}   
+
+let propertyName = 'gender';
+let propertyValue = 'male';
+
+objectDinamica[propertyName] = propertyValue;
+console.log(objectDinamica); 
