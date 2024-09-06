@@ -200,3 +200,27 @@ fetch('https://randomuser.me/api/?results=5')
         })
         .catch(err => console.log('Error:', err)); 
 
+/* asyc await */
+
+const asyncFunctions = async () => {
+    let url = 'https://randomuser.me/api/?results=2';
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('Error al obtener los datos');
+        }
+        const data = await response.json();
+        return data.results;
+    }
+    catch (err) {
+        console.log('Error:', err);
+    }
+}
+
+asyncFunctions()
+    .then(users => {
+        users.forEach(user => {
+            console.log(user);
+        });
+    }
+);
