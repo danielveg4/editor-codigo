@@ -106,3 +106,97 @@ let range1 = new Range(50, 100);
 let range2 = new Range(200, 300);
 range1.show();
 range2.show();
+
+/* PROMISE */
+
+const getPet = (petId) => {
+    return new Promise((resolve) => { // retornamos una promesa con dos métodos: resolve y reject
+        setTimeout(() => {
+            console.log('Pet ID:', petId);
+            resolve();
+        }, 2000);
+    }
+)};
+
+getPet(1)
+.then (() => getPet(2))
+.then (() => getPet(3))
+.then (() => console.log('Todas las mascotas han sido mostradas.'));
+
+/* ayax fetch, then para operaciones asincronas
+vamos que fetch hace una conexión asíncrona con ayax y devuelve un response, dentro del que sacamos info */
+
+class Contact {
+    constructor(user) {
+        this.name = `${user.name.first} ${user.name.last}`;
+        this.email = user.email;
+        this.phone = user.phone;
+    }
+
+    showContact() {
+        console.log(`Name: ${this.name}, Email: ${this.email}, Phone: ${this.phone}`);
+    }
+}
+
+fetch('https://randomuser.me/api/?results=5')
+    .then(response => {
+        if (response.status === 200) {
+            return response.json();
+        } else {
+            console.log('Error al obtener los datos');
+        }
+    })
+    .then(data => {
+        const users = data.results;
+        users.forEach(user => {
+            const contact = new Contact(user);
+            contact.showContact();  
+        });
+    })
+    .catch(err => console.log('Error:', err));
+
+    /* generando una promesa no con un fetch, sino con una promesa que hago yo*/
+
+    const resuelveEnUnSegundo = () => {
+        console.log('empieza la promesa');
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('Promesa resuelta');
+            }, 1000);
+        })
+    }
+
+    resuelveEnUnSegundo()
+    .then((msg) => console.log(msg))
+    .catch((err) => console.log(err));
+
+/*   más, para un service  */
+
+    const url = 'https://randomuser.me/api/';
+
+    const getUsers = (quantity) => {
+        return new Promise((resolve, reject) => {
+            fetch(`${url}?results=${quantity}`)
+                .then(response => {
+                    if (response.ok) {  
+                        return response.json();  
+                    } else {
+                        throw new Error('Error al obtener los datos');
+                    }
+                })
+                .then(data => {
+                    let users = data.results;
+                    resolve(users);
+                })
+                .catch(err => reject(err));
+        });
+    }
+    
+    getUsers(2)
+        .then(users => {
+            users.forEach(user => {
+                console.log(user);
+            });
+        })
+        .catch(err => console.log('Error:', err)); 
+
