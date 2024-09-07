@@ -1,0 +1,14 @@
+{
+    "video": false,
+    "screenshotOnRunFailure": false,
+    "reporter": "cypress-multi-reporters",
+    "reporterOptions": {
+        "configFile": "reporter-config.json",
+        "charts": false,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/reports",
+        "reportFilename": "cypress-report",
+        "overwrite": false
+    }
+}
