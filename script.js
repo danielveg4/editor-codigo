@@ -13,7 +13,7 @@ const loadFromLocalStorage = () => {
             updatePreview();  
         }
     } catch (error) {
-        console.error('Error al cargar el código desde localStorage:', error);
+        console.error('error al cargar código desde LS:', error);
     }
 };
 
@@ -22,7 +22,7 @@ const updatePreview = () => {
         const code = textElement.value;
         viewElement.srcdoc = code;
     } catch (error) {
-        console.error('Error al actualizar la vista previa:', error);
+        console.error('error al actualizar vista previa:', error);
     }
 };
 
