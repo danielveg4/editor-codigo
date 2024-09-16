@@ -1,9 +1,51 @@
 const textElement = document.getElementById('text-code');
-const viewElement = document.getElementById('view')
+const viewElement = document.getElementById('preview');
 
-const update = () => {
-    console.log(textElement.value);
-    viewElement.srcdoc = textElement.value;
-}
+const saveToLocalStorage = () => {
+    localStorage.setItem('code', textElement.value);
+};
 
-textElement.addEventListener('keydown', update);
+const loadFromLocalStorage = () => {
+    const savedCode = localStorage.getItem('code');
+    if (savedCode) {
+        textElement.value = savedCode;
+        updatePreview();  
+    }
+};
+
+const updatePreview = () => {
+    const code = textElement.value;
+    viewElement.srcdoc = code;
+};
+
+const debounce = (func, delay) => {
+    let timeoutId;
+    return (...args) => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => func(...args), delay);
+    };
+};
+
+const handleInput = debounce(() => {
+    updatePreview();
+    saveToLocalStorage();
+}, 300);
+
+
+const handleKeyboardShortcuts = (e) => {
+    if (e.ctrlKey && e.key === 's') {
+        e.preventDefault();
+        saveToLocalStorage();
+        console.log('código guardado!');
+    }
+    if (e.ctrlKey && e.key === 'Enter') {
+        e.preventDefault();
+        updatePreview();
+        console.log('código lanzado!')
+    }
+};
+
+loadFromLocalStorage(); 
+
+textElement.addEventListener('input', handleInput);
+document.addEventListener('keydown', handleKeyboardShortcuts);
