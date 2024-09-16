@@ -6,16 +6,24 @@ const saveToLocalStorage = () => {
 };
 
 const loadFromLocalStorage = () => {
-    const savedCode = localStorage.getItem('code');
-    if (savedCode) {
-        textElement.value = savedCode;
-        updatePreview();  
+    try {
+        const savedCode = localStorage.getItem('code');
+        if (savedCode) {
+            textElement.value = savedCode;
+            updatePreview();  
+        }
+    } catch (error) {
+        console.error('Error al cargar el código desde localStorage:', error);
     }
 };
 
 const updatePreview = () => {
-    const code = textElement.value;
-    viewElement.srcdoc = code;
+    try {
+        const code = textElement.value;
+        viewElement.srcdoc = code;
+    } catch (error) {
+        console.error('Error al actualizar la vista previa:', error);
+    }
 };
 
 const debounce = (func, delay) => {
